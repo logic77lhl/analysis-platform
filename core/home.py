@@ -36,9 +36,9 @@ def make_home_render(page_map: dict, tools: list):
                             unsafe_allow_html=True)
                         if t.url:
                             st.link_button("打开外部工具", t.url,
-                                           use_container_width=True)
+                                           width='stretch')
                         elif st.button("进入", key=f"home:go:{t.slug}",
-                                       use_container_width=True):
+                                       width='stretch'):
                             st.switch_page(page_map[t.slug])
 
         # ── 最近运行历史（SQLite 持久化） ──
@@ -53,7 +53,7 @@ def make_home_render(page_map: dict, tools: list):
                         "参数": "，".join(f"{k}={v}" for k, v in r["payload"].items()) or "-",
                         "时间": r["created_at"],
                     } for r in runs]),
-                    use_container_width=True, hide_index=True,
+                    width='stretch', hide_index=True,
                 )
 
     return render

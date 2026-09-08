@@ -124,9 +124,9 @@ def result_card(outputs: list[dict], results: dict, key_ns: str) -> None:
         if spec.get("label"):
             st.subheader(spec["label"])
         if t == "dataframe":
-            st.dataframe(val, use_container_width=True, hide_index=True)
+            st.dataframe(val, width='stretch', hide_index=True)
         elif t == "plotly":
-            st.plotly_chart(val, use_container_width=True, key=f"{key_ns}:out:{key}")
+            st.plotly_chart(val, width='stretch', key=f"{key_ns}:out:{key}")
         elif t == "text":
             st.write(val)
         elif t == "markdown":

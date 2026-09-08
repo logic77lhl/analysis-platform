@@ -48,5 +48,5 @@ def render() -> None:
             pd.DataFrame([{"工具": r["tool"],
                            "参数": r["payload"],
                            "时间": r["created_at"]} for r in runs]),
-            use_container_width=True, hide_index=True,
+            width='stretch', hide_index=True,
         )

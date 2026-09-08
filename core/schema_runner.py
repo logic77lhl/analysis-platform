@@ -25,7 +25,7 @@ def run(tool) -> None:
     with st.form(f"{tool.slug}:form", border=False):
         params = ui.param_form(spec.get("inputs", []), key_ns=tool.slug)
         submitted = st.form_submit_button("▶ 运行", type="primary",
-                                          use_container_width=True)
+                                          width='stretch')
 
     if submitted:
         # UploadedFile → 普通 dict，logic 层不接触 streamlit 对象；

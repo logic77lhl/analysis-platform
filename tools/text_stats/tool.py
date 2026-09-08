@@ -44,4 +44,4 @@ def render() -> None:
         c2.metric("词元数（中文字/英文词）", result["words"])
         st.subheader("词频 Top")
         st.dataframe(pd.DataFrame(result["top"], columns=["词元", "次数"]),
-                     use_container_width=True, hide_index=True)
+                     width='stretch', hide_index=True)
