@@ -1,0 +1,9 @@
+# ── 平台核心 ────────────────────────
+streamlit>=1.39        # st.navigation / st.Page / st.switch_page
+pyyaml>=6.0            # meta.yaml / form.yaml 解析
+
+# ── 数据与图表 ──────────────────────
+pandas>=2.0
+numpy>=1.26
+plotly>=5.18
+openpyxl>=3.1          # Excel 读取

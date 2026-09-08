@@ -1,0 +1,6 @@
+name: 数据速览
+slug: stats-explorer
+icon: 📈
+group: 数据分析
+description: 上传 CSV/Excel，自动生成统计摘要、指标卡和分布直方图（schema 驱动模式示例，无需写 UI）
+schema: form.yaml

@@ -1,0 +1,6 @@
+name: 文本分析
+slug: text-stats
+icon: 📝
+group: 文本工具
+description: 中英文文本字数统计与词频 Top-N（自由 render 模式示例，适合复杂交互）
+entry: render

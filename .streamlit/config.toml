@@ -1,0 +1,7 @@
+# 平台运行配置
+[browser]
+gatherUsageStats = false
+
+[server]
+# 后台/服务方式运行，跳过首次启动的邮箱引导
+headless = true

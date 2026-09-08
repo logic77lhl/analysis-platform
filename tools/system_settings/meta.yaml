@@ -1,0 +1,6 @@
+name: 系统设置
+slug: system-settings
+icon: ⚙️
+group: 平台管理
+description: 用户配置持久化在数据目录（DATA_DIR），CI/CD 重新部署不会丢失
+entry: render

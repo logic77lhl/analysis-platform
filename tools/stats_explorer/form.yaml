@@ -1,0 +1,27 @@
+description: 上传 CSV / Excel 文件，自动输出统计摘要与分布图
+inputs:
+  - type: file
+    key: file
+    label: 数据文件
+    accept: [csv, xlsx]
+    help: 支持 .csv 和 .xlsx
+  - type: number
+    key: bins
+    label: 直方图分箱数
+    default: 20
+    min: 5
+    max: 100
+    step: 5
+outputs:
+  - type: metrics
+    key: metrics
+    label: 概览
+  - type: dataframe
+    key: summary
+    label: 统计摘要（describe）
+  - type: plotly
+    key: fig
+    label: 首个数值列分布
+  - type: download
+    key: csv
+run: logic:analyze
