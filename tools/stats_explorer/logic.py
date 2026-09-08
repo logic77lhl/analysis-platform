@@ -27,7 +27,8 @@ def analyze(params: dict) -> dict:
     summary = num.describe().T.reset_index().rename(columns={"index": "列名"})
 
     col = num.columns[0]
-    fig = px.histogram(num, x=col, nbins=bins, title=f"「{col}」分布")
+    fig = px.histogram(num, x=col, nbins=bins, title=f"「{col}」分布",
+                       color_discrete_sequence=["#7C5CFC"])
 
     return {
         "metrics": {"行数": len(df), "总列数": df.shape[1], "数值列": num.shape[1]},

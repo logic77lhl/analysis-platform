@@ -5,3 +5,11 @@ gatherUsageStats = false
 [server]
 # 后台/服务方式运行，跳过首次启动的邮箱引导
 headless = true
+
+[theme]
+# 设计系统：暖白背景 + 紫色主色（SaaS Dashboard 风格）
+base = "light"
+primaryColor = "#7C5CFC"
+backgroundColor = "#F5F3F0"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#161024"

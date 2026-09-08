@@ -5,43 +5,116 @@ import streamlit as st
 
 CSS = """
 <style>
-    /* 页头横幅 */
+    /* ── 设计系统 tokens ─────────────────────────────── */
+    :root {
+        --bg: #F5F3F0;
+        --surface: #FFFFFF;
+        --primary: #7C5CFC;
+        --primary-hover: #6A4AE8;
+        --primary-light: #F1EEFF;
+        --text-primary: #161024;
+        --text-secondary: #564E6A;
+        --text-muted: #9590A4;
+        --border: #E6E3EE;
+        --success: #0D9F6E;  --success-bg: #ECFDF5;
+        --warning: #D97706;  --warning-bg: #FFFBEB;
+        --error: #DC2626;    --error-bg: #FEF2F2;
+        --radius-lg: 20px; --radius-md: 14px; --radius-sm: 10px; --radius-xs: 6px;
+        --shadow-sm: 0 1px 3px rgba(22,16,36,0.06);
+        --shadow-md: 0 4px 12px rgba(22,16,36,0.08);
+        --shadow-lg: 0 8px 24px rgba(22,16,36,0.1);
+    }
+
+    /* 字体：标题 Sora / 正文 DM Sans */
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap');
+    html, body, button, input, select, textarea,
+    [data-testid="stMarkdownContainer"], [data-testid="stText"] {
+        font-family: 'DM Sans', 'Microsoft YaHei', sans-serif;
+        color: var(--text-primary);
+    }
+    h1, h2, h3, h4, .plat-header h2, .plat-hero h2,
+    [data-testid="stMetricValue"], [data-testid="stMetricLabel"] {
+        font-family: 'Sora', 'Microsoft YaHei', sans-serif;
+    }
+    h2 { color: var(--text-primary); }
+    p, span, li { color: var(--text-secondary); }
+    .stApp { background: var(--bg); }
+
+    /* 入场轻淡入（rerun 时重播但时长短，不干扰） */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .plat-header, .plat-hero { animation: fadeUp .3s ease both; }
+    [data-testid="stMetric"], .tool-card { animation: fadeUp .35s ease both; }
+
+    /* ── 页头横幅（浅色：主色浅底 + 左侧主色条） ────── */
     .plat-header, .plat-hero {
-        background: linear-gradient(120deg, #1a1a2e 0%, #16213e 55%, #0f3460 100%);
-        border-radius: 14px;
+        background: var(--primary-light);
+        border-left: 4px solid var(--primary);
+        border-radius: var(--radius-lg);
         padding: 20px 26px;
         margin: 4px 0 14px 0;
+        box-shadow: var(--shadow-sm);
     }
     .plat-hero { padding: 34px 30px; }
-    .plat-header h2, .plat-hero h2 { color: #fff; margin: 0; font-weight: 700; }
-    .plat-header p, .plat-hero p { color: #c9d1e4; margin: 6px 0 0; font-size: 0.92rem; }
+    .plat-header h2, .plat-hero h2 { color: var(--text-primary); margin: 0; font-weight: 700; }
+    .plat-header p, .plat-hero p { color: var(--text-secondary); margin: 6px 0 0; font-size: 0.92rem; }
 
-    /* 工具卡片 */
+    /* ── 工具卡片 ───────────────────────────────────── */
     .tool-card {
-        border: 1px solid rgba(120, 120, 128, 0.25);
-        border-radius: 12px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
         padding: 16px;
         height: 100%;
-        background: rgba(120, 120, 128, 0.05);
+        background: var(--surface);
+        box-shadow: var(--shadow-sm);
         transition: all 0.18s ease;
     }
     .tool-card:hover {
         transform: translateY(-2px);
-        border-color: #e94560;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        border-color: var(--primary);
+        box-shadow: var(--shadow-md);
     }
-    .tool-card h4 { margin: 0 0 6px 0; }
-    .tool-card p { color: rgba(150, 150, 150, 1); font-size: 0.85rem; min-height: 2.4em; margin: 0; }
+    .tool-card h4 { margin: 0 0 6px 0; color: var(--text-primary); }
+    .tool-card p { color: var(--text-muted); font-size: 0.85rem; min-height: 2.4em; margin: 0; }
 
-    /* 指标卡 */
+    /* ── 指标卡（中卡片圆角 + 悬停阴影） ─────────────── */
     div[data-testid="stMetric"] {
-        background: rgba(120, 120, 128, 0.08);
-        border-radius: 10px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
         padding: 14px 16px;
+        box-shadow: var(--shadow-sm);
+        transition: box-shadow 0.18s ease;
+    }
+    div[data-testid="stMetric"]:hover { box-shadow: var(--shadow-md); }
+    [data-testid="stMetricValue"] { color: var(--text-primary); }
+
+    /* ── 表格容器 ───────────────────────────────────── */
+    div[data-testid="stDataFrame"] {
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
     }
 
-    /* 侧边栏呼吸感 */
+    /* ── 按钮 ───────────────────────────────────────── */
+    button[kind="primary"] { border-radius: var(--radius-sm); }
+    button[kind="primary"]:hover { background: var(--primary-hover) !important; }
+    button[kind="secondary"], button[kind="tertiary"] {
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--border);
+    }
+
+    /* ── 侧边栏 ─────────────────────────────────────── */
+    section[data-testid="stSidebar"] {
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+    }
     section[data-testid="stSidebar"] > div:first-child { padding-top: 1.4rem; }
+    section[data-testid="stSidebar"] * { color: var(--text-secondary); }
+    section[data-testid="stSidebar"] a span { color: var(--text-primary); }
+
+    /* 分隔线弱化 */
+    hr { border-color: var(--border); }
 </style>
 """
 
