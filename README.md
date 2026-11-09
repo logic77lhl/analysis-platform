@@ -1,3 +1,7 @@
+**中文** | [English](README.en.md)
+
+---
+
 # 分析平台
 
 一个用来装分析工具的 Streamlit 容器：在 `tools/` 下新建一个目录、写一份 `meta.yaml`，它就自动出现在侧边栏和首页。入口文件 `app.py` 不需要动。
